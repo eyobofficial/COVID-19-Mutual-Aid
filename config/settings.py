@@ -24,7 +24,12 @@ SECRET_KEY = config('SECRET_KEY')
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 DEBUG = config('DEBUG', default=True)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'http://covid19bot.pythonanywhere.com',
+    'https://covid19bot.pythonanywhere.com'
+]
 
 
 # Application definition
