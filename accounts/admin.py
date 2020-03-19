@@ -14,3 +14,4 @@ class CustomUserAdmin(admin.ModelAdmin):
     list_display_link = ('username', )
     list_filter = ('is_active', 'is_staff', 'is_superuser', )
     search_fields = ('username', 'first_name', 'last_name')
+    filter_horizontal = ('user_permissions', )
