@@ -12,7 +12,11 @@ class Question(models.Model):
     """
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     number = models.IntegerField(unique=True)
-    text = models.TextField(max_length=255)
+    text = models.TextField('question text')
+    note = models.TextField(
+        blank=True,
+        help_text='Any notes/remarks you want to add to the question (optional)'
+    )
 
     class Meta:
         ordering = ('number', )

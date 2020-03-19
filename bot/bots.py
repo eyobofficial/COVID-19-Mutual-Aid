@@ -141,6 +141,8 @@ class TelegramBot:
             f'{self.session.question.number}. {self.session.question.text}',
             keyboard=keyboard
         )
+        if self.session.question.note:
+            self.reply(self.session.question.note)
 
     def get_answer(self, user):
         """

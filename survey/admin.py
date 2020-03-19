@@ -11,6 +11,7 @@ class ChoiceInline(admin.StackedInline):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('number', 'text')
+    list_display_links = ('number', 'text')
     inlines = [ChoiceInline]
 
 
