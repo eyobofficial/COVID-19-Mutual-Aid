@@ -5,6 +5,7 @@ from .models import Question, Choice, Answer, UserSession
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
+    extra = 0
 
 
 @admin.register(Question)

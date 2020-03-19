@@ -12,7 +12,7 @@ class Question(models.Model):
     """
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     number = models.IntegerField(unique=True)
-    text = models.CharField(max_length=255)
+    text = models.TextField(max_length=255)
 
     class Meta:
         ordering = ('number', )
