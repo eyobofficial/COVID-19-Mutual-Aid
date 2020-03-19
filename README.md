@@ -1,23 +1,30 @@
 # Gebeya Schedule Bot
 A simple telegram bot that responds back the list of class schedules for [Gebeya Training Academy.](https://gebeya.training/)
 
-**Bot link:** [@gebeya_schedule_bot](http://t.me/gebeya_schedule_bot)
+**Bot link:** [@covid_19_mutual_aid_bot](t.me/covid_19_mutual_aid_bot)
 
-## Available Commands
+## COVID-19 Mutual Aid Request Form
 
-#### Class Schedules
-* `/today` - get class schedules for today
-* `/tomorrow` - get class schedules for tomorrow
-* `/week` - get class schedules for 1 week starting from today
-* `/month` - get class schedules for 1 month starting from today
+Use this form if you want different food or other supplies dropped at your door.
+We are a mutual aid network organizing in Addis Ababa to help one another in
+any way possible. Fill out this form if you want to make requests.
+We'll be prioritizing people who are sick, disabled and/or elderly.
 
-#### Account Settings
-* `/me` - get your account details
-* `/track` - set or change your track
-* `/session` - set or change your class session
+Volunteer with us: https://forms.gle/YBPx7bGBLUBFi6Kq6
 
-#### More Commands
-* `/start` - get started with the bot
-* `/about` - get brief description about the bot
-* `/help` - get the list of all commands
-* `/credits` - get the list of contributors & developers
+---
+ምግብ እና ሌሎች አቅርቦቶችን በርዎ ላይ እንድናቀብልዎ ከወደዱ፣ ይህን ቅጽ ይጠቀሙ።
+ይህ በአዲስ አበባ የተጀመረው የጋራ መደጋገፍ የበጎ አድራጎት ተግባር በኮሮና ምክንያት በተለይቶ መቆያ ወይም
+በቤታቸው ለብቻቸው ተነጥለው (Quarantined) የዕለት ተዕለት እንቅስቃሴያቸውን መስራት ያልቻሉ ወገኖቻችንን
+ለመርዳት የተቋቋመ ነው። በተጨማሪም ስለ ቫይረሱ ግንዛቤ ማስጨበጥ እና አስፈላጊ የሆኑ የጥንቃቄ ዕቃዎችን
+ለማቅረብ ያስባል።በኮራና ቫይረስ ምክንያት እራስዎን ወይም ቤተሰብዎን በቤት ውስጥ አግልለው ተቀምጠው ከሆነ
+በሚያጋጥምዎት ችግሮች ልናግዝዎ እንሞክራለን። ይህን ፎርም በመሙላት እንዴት እንድናግዝዎ እንደሚፈልጉ ይንገሩን
+
+ከእኛ ጋር በበጎ ፈቃድ ይስሩ: https://forms.gle/YBPx7bGBLUBFi6Kq6
+
+*Use the following commands:*
+`/start` - start filling the form
+`/result` - see your answers once you completed the form
+`/about` - learn about us and what we do
+`/form` - continue filling the form
+`/help` - get the list of all commands
