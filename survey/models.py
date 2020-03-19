@@ -5,6 +5,8 @@ from django.db import models
 
 from bot.models import TelegramUser as User
 
+from .validators import validate_especial_charachters
+
 
 class Question(models.Model):
     """
@@ -12,9 +14,13 @@ class Question(models.Model):
     """
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     number = models.IntegerField(unique=True)
-    text = models.TextField('question text')
+    text = models.TextField(
+        'question text',
+        validators=[validate_especial_charachters]
+    )
     note = models.TextField(
         blank=True,
+        validators=[validate_especial_charachters],
         help_text='Any notes/remarks you want to add to the question (optional)'
     )
 
@@ -35,7 +41,10 @@ class Choice(models.Model):
         on_delete=models.CASCADE,
         related_name='choices'
     )
-    text = models.CharField(max_length=255)
+    text = models.CharField(
+        max_length=255,
+        validators=[validate_especial_charachters]
+    )
 
     def __str__(self):
         return f'Choice for {self.question.number}'
