@@ -27,6 +27,7 @@ DEBUG = config('DEBUG', default=True)
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    'covid19bot.pythonanywhere.com',
     'http://covid19bot.pythonanywhere.com',
     'https://covid19bot.pythonanywhere.com'
 ]
