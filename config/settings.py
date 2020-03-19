@@ -15,7 +15,7 @@ from decouple import config, Csv
 from environ import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(__file__) - 3
+BASE_DIR = Path(__file__) - 2
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
