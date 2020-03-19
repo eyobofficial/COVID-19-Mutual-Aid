@@ -13,7 +13,7 @@ class TelegramBot:
     """
     Telegram Bot Handler.
     """
-    COMMANDS = ['start', 'help', 'about', 'result', 'form']
+    COMMANDS = ['start', 'help', 'about', 'result', 'form', 'clear']
 
     def __init__(self, context, **kwargs):
         self.bot = telegram.Bot(settings.TELEGRAM_BOT_TOKEN)
@@ -134,15 +134,19 @@ class TelegramBot:
                 'question': Question.objects.order_by('number').first()
             }
         )
-        choice_list = self.session.question.choices.all()
+        question = self.session.question
+        choice_list = question.choices.all()
         if choice_list.count():
             keyboard = [[choice.text] for choice in choice_list]
         self.reply(
-            f'{self.session.question.number}. {self.session.question.text}',
+            f'{question.number}. {question.text}',
             keyboard=keyboard
         )
         if self.session.question.note:
-            self.reply(self.session.question.note)
+            self.reply(
+                f'*Note: {question.note}*',
+                keyboard=keyboard
+            )
 
     def get_answer(self, user):
         """
@@ -161,7 +165,7 @@ class TelegramBot:
                 self.reply(
                     f'{self.user.first_name},\n'
                     'Thank you for completing the form. '
-                    'Here is what you have filled.\n\n'
+                    'Here is what you have filled:\n\n'
                 )
                 self.result()
             else:
@@ -191,6 +195,17 @@ class TelegramBot:
             self.reply(
                 'If you want to change your answer, use the /start command.'
             )
+
+    def clear(self):
+        """
+        Deletes users previous choices.
+        """
+        self.user.answers.all().delete()
+        self.user.session.delete()
+        self.reply(
+            'Your previous answers have been cleared. '
+            'To start again, use the /start command.'
+        )
 
     def help(self, **kwargs):
         """
