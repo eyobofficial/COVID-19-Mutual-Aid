@@ -245,3 +245,4 @@ Temporary Items
 /logs
 celerybeat.pid
 *.db
+ngrok
