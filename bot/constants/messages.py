@@ -1,84 +1,40 @@
-welcome_message = \
+about_message = \
 """
-👋🏼 Hi {}! You are currently enrolled to the {} track \
-during the {}-time session.
+*COVID-19 Mutual Aid Request Form*
 
-*To checkout your class schedules:*
-/today - get class schedules for today
-/tomorrow - get class schedules for tomorrow
-/week - get class schedules for 1 week starting from today
-/month - get class schedules for 1 month starting from today
+Use this form if you want different food or other supplies dropped at your door.
+We are a mutual aid network organizing in Addis Ababa to help one another in
+any way possible. Fill out this form if you want to make requests.
+We'll be prioritizing people who are sick, disabled and/or elderly.
 
-*To manage your track or session:*
-/me - get your account details
-/track - set or change your track
-/session - set or change your class session
+Volunteer with us: https://forms.gle/YBPx7bGBLUBFi6Kq6
 
-*For more commands:*
-/start - get started with me (the bot)
-/about - get brief description about me (the bot)
+---
+ምግብ እና ሌሎች አቅርቦቶችን በርዎ ላይ እንድናቀብልዎ ከወደዱ፣ ይህን ቅጽ ይጠቀሙ።
+ይህ በአዲስ አበባ የተጀመረው የጋራ መደጋገፍ የበጎ አድራጎት ተግባር በኮሮና ምክንያት በተለይቶ መቆያ ወይም
+በቤታቸው ለብቻቸው ተነጥለው (Quarantined) የዕለት ተዕለት እንቅስቃሴያቸውን መስራት ያልቻሉ ወገኖቻችንን
+ለመርዳት የተቋቋመ ነው። በተጨማሪም ስለ ቫይረሱ ግንዛቤ ማስጨበጥ እና አስፈላጊ የሆኑ የጥንቃቄ ዕቃዎችን
+ለማቅረብ ያስባል።በኮራና ቫይረስ ምክንያት እራስዎን ወይም ቤተሰብዎን በቤት ውስጥ አግልለው ተቀምጠው ከሆነ
+በሚያጋጥምዎት ችግሮች ልናግዝዎ እንሞክራለን። ይህን ፎርም በመሙላት እንዴት እንድናግዝዎ እንደሚፈልጉ ይንገሩን
+
+ከእኛ ጋር በበጎ ፈቃድ ይስሩ: https://forms.gle/YBPx7bGBLUBFi6Kq6
+
+*Use the following commands:*
+/start - start filling the form
+/result - see your answers once you completed the form
+/about - learn about us and what we do
+/form - continue filling the form
 /help - get the list of all commands
-/credits - get the list of contributors & developers
 """
 
 
 help_message = \
 """
-*To checkout your class schedules:*
-/today - get class schedules for today
-/tomorrow - get class schedules for tomorrow
-/week - get class schedules for 1 week starting from today
-/month - get class schedules for 1 month starting from today
+*Available commands:*
 
-*To manage your track or session:*
-/me - get your account details
-/track - set or change your track
-/session - set or change your class session
-
-*For more commands:*
-/start - get started with me (the bot)
-/about - get brief description about me (the bot)
+/start - start filling the form
+/result - see your answers once you completed the form
+/about - learn about us and what we do
+/form - continue filling the form
 /help - get the list of all commands
-/credits - get the list of contributors & developers
 """
-
-session_missing = \
-"""
-But I don't know your class session yet. Use the /session command to set it.
-"""
-
-track_missing = \
-"""
-But I don't know your track yet. Use the /track command to set it.
-"""
-
-
-me = \
-"""
-*Name:* {}
-
-*Track:* {}
-
-*Session: *{}
-
-You can update your track and session using the /track & /session commands.
-"""
-
-
-credits_message = \
-"""
-**DEVELOPERS**
-
-👤 Eyob Tariku
-✉️ eyobtariku@gmail.com
-📱 +251 911 42 78 05
-"""
-
-
-about = \
-"""
-👋🏼 My name is `Gebeya Class Bot`. I will help you to easily get your \
-`daily`, `weekly` and `monthly` Gebeya class schedules. Get started with me by \
-firing the /start command.
-"""
-

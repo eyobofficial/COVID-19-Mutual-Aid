@@ -14,6 +14,7 @@ class TelegramUser(models.Model):
     last_name = models.CharField(max_length=120, blank=True)
     is_bot = models.BooleanField(default=False)
     is_manually_added = models.BooleanField(default=False)
+    access_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -22,3 +23,4 @@ class TelegramUser(models.Model):
 
     def __str__(self):
         return self.first_name
+

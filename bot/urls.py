@@ -5,5 +5,5 @@ from .views import TelegramBotView
 app_name = 'bot'
 
 urlpatterns = [
-    path('', TelegramBotView.as_view(), name='telegram')
+    path('', TelegramBotView.as_view(), name='telegram-bot')
 ]

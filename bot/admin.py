@@ -9,6 +9,7 @@ class TelegramUserAdmin(admin.ModelAdmin):
         'id',
         'first_name',
         'username',
+        'access_count',
         'updated_at',
         'created_at'
     )

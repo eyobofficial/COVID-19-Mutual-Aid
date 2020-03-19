@@ -20,7 +20,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', admin.site.urls),
-    path('my-bot/', include('bot.urls', namespace='bot'))
+    path('bot-v1/', include('bot.urls', namespace='bot'))
 ]
 
 

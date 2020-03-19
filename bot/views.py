@@ -34,6 +34,8 @@ class TelegramBotView(APIView):
                 'is_bot': bot.sender.get('is_bot', False)
             }
         )
+        user.access_count += 1
+        user.save()
         bot.process(user)
         return Response(status=status.HTTP_200_OK)
 

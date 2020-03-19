@@ -25,6 +25,7 @@ pendulum = "*"
 pyyaml = "*"
 gunicorn = "*"
 django-braces = "*"
+certifi = "*"
 
 [requires]
 python_version = "3.6"

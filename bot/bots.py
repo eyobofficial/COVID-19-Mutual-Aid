@@ -6,13 +6,14 @@ from survey.models import Answer, UserSession, Question, Answer
 
 from .constants import messages
 from .models import TelegramUser as User
+from .utilities import is_form_completed
 
 
 class TelegramBot:
     """
     Telegram Bot Handler.
     """
-    COMMANDS = ['language', 'form', 'start', 'help', 'welcome']
+    COMMANDS = ['start', 'help', 'about', 'result', 'form']
 
     def __init__(self, context, **kwargs):
         self.bot = telegram.Bot(settings.TELEGRAM_BOT_TOKEN)
@@ -40,9 +41,14 @@ class TelegramBot:
 
     def send_message(self, chat_id, text, keyboard=None):
         """
-        Send message to a user with his/her telegram_id.
+        Sends message to a user with telegram_id.
+
+        Args:
+            chat_id (int): Telegram chat id
+            text (str): Message to send
+            keyboard (list): Input keyboard button to display
         """
-        reply_markup = None
+        reply_markup = telegram.ReplyKeyboardRemove()
         if keyboard:
             reply_markup = telegram.ReplyKeyboardMarkup(
                 keyboard,
@@ -59,26 +65,24 @@ class TelegramBot:
 
     def reply(self, text, keyboard=None):
         """
-        Reply to the user sent who sent the message.
+        Replys back to the user sent who sent the message.
+
+        Args:
+            text (str): Message to send
+            keyboard (list): Input keyboard button to display
         """
-        if keyboard is not None:
-            self.send_message(
-                chat_id=self.chat_id,
-                text=text,
-                keyboard=keyboard
-            )
-        else:
-            reply_markup = telegram.ReplyKeyboardRemove()
-            self.bot.send_message(
-                chat_id=self.chat_id,
-                text=text,
-                parse_mode='Markdown',
-                reply_markup=reply_markup
-            )
+        self.send_message(
+            chat_id=self.chat_id,
+            text=text,
+            keyboard=keyboard
+        )
 
     def process(self, user):
         """
-        Dispatch user messages (commands and texts) to the right method.
+        Dispatchs user messages (commands and texts) to the right method.
+
+        Args:
+            user: The telegram user instance of the sender
         """
         self.user = user
         self.session, _ = UserSession.objects.get_or_create(
@@ -88,10 +92,8 @@ class TelegramBot:
         if self.message.startswith('/'):
             command = self.message.lstrip('/')
             if command not in self.COMMANDS:
-               self.reply(
-                   "I don't know this command. "
-                    "Use /help to see the commands."
-                )
+               self.reply("I don't know this command.")
+               self.help()
             else:
                 method = getattr(self, command)
                 method()
@@ -99,11 +101,32 @@ class TelegramBot:
             self.get_answer(user)
 
     def start(self):
+        """
+        Command to reset & restart survey form.
+        """
         self.user.answers.all().delete()
         UserSession.objects.filter(user=self.user).delete()
+        question_count = Question.objects.count()
+        self.reply(
+            f'Hi {self.user.first_name}, '
+            f'the form contains a total of {question_count} questions.'
+        )
         self.send_question()
 
+    def form(self):
+        """
+        Continues filling the form.
+        """
+        if is_form_completed(self.user):
+            self.reply('You have already completed filling the form.')
+            self.result()
+        else:
+            self.send_question()
+
     def send_question(self):
+        """
+        Sends a question and set the current question session.
+        """
         keyboard = None
         self.session, _ = UserSession.objects.get_or_create(
             user=self.user,
@@ -114,22 +137,30 @@ class TelegramBot:
         choice_list = self.session.question.choices.all()
         if choice_list.count():
             keyboard = [[choice.text] for choice in choice_list]
-        self.reply(text=self.session.question.text, keyboard=keyboard)
+        self.reply(
+            f'{self.session.question.number}. {self.session.question.text}',
+            keyboard=keyboard
+        )
 
     def get_answer(self, user):
         """
-        Handle the user response messages.
+        Handles the user response messages for the current question session.
         """
         if self.session:
             Answer.objects.update_or_create(
                 user=self.user,
                 question=self.session.question,
-                answer=self.message
+                defaults={'text': self.message}
             )
             next_question = Question.objects.filter(
                 number__gt=self.session.question.number
             ).first()
             if next_question is None:
+                self.reply(
+                    f'{self.user.first_name},\n'
+                    'Thank you for completing the form. '
+                    'Here is what you have filled.\n\n'
+                )
                 self.result()
             else:
                 self.user.session.question = next_question
@@ -139,7 +170,25 @@ class TelegramBot:
             self.start()
 
     def result(self):
-        self.reply('Summary goes here')
+        if not is_form_completed(self.user):
+            self.reply('Please complete filling the form first.')
+            self.start()
+        else:
+            answers = Answer.objects.filter(
+                user=self.user
+            ).order_by('question__number')
+            answer_list = []
+            for answer in answers:
+                line = (
+                    f'{answer.question.number}. {answer.question.text}\n'
+                    f'`{answer.text}`'
+                )
+                answer_list.append(line)
+
+            self.reply('\n\n'.join(answer_list))
+            self.reply(
+                'If you want to change your answer, use the /start command.'
+            )
 
     def help(self, **kwargs):
         """
@@ -151,4 +200,4 @@ class TelegramBot:
         """
         Send a reply with a brief introduction of the bot.
         """
-        self.reply(text=messages.about)
+        self.reply(messages.about_message)
