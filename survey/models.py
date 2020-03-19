@@ -49,11 +49,11 @@ class Answer(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('-created_at', )
+        ordering = ('user', 'question__number')
         default_related_name = 'answers'
 
     def __str__(self):
-        return f'{self.question.number } | {self.user.username}'
+        return f'{self.text}'
 
 
 class UserSession(models.Model):

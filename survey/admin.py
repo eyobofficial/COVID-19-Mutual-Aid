@@ -15,10 +15,5 @@ class QuestionAdmin(admin.ModelAdmin):
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'question', 'created_at')
+    list_display = ('user', 'question', 'text', 'created_at')
     list_filter = ('question', 'created_at')
-
-
-@admin.register(UserSession)
-class UserSessionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'question')
